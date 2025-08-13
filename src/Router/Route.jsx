@@ -8,6 +8,7 @@ import BrowsTips from "../Components/BrowsTips";
 import ShareTIp from "../Components/ShareTIp";
 import MyTip from "../Components/MyTip";
 import PrivateRoute from "../Provider/PrivateRoute";
+import TermsService from "../Pages/TermsService";
 
 const router = createBrowserRouter([
     {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
                     <MyTip></MyTip>
                 </PrivateRoute>
             },
+            {
+                path: 'terms',
+                Component: TermsService,
+            }
         ]
     }
 ]);

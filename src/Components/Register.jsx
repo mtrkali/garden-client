@@ -1,21 +1,49 @@
- import React, { useContext } from 'react';
-import { Link } from 'react-router';
+import React, { useContext, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../AuthLayouts/AuthContext';
+import { FaGoogle } from 'react-icons/fa';
 const Register = () => {
-    const { registerUser } = useContext(AuthContext)
+    const { registerUser, setUser, goooleLogIn, setError, error } = useContext(AuthContext)
+    const [passErr, setPassErr] = useState('');
+
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{8,}$/;
+
 
     const handleRegister = e => {
         e.preventDefault();
         const form = e.target;
         const formData = new FormData(form)
-        const {name, email, password} = Object.fromEntries(formData.entries());
+        const { name, email, password } = Object.fromEntries(formData.entries());
 
+        if (!passwordRegex.test(password)) {
+            setPassErr("Password must be at least 8 characters, include 1 uppercase, 1 lowercase, and 1 special character.")
+        } else {
+            setPassErr('');
+        }
+        // creating user --
         registerUser(email, password)
-        .then(result => {
-            alert('success fully create a user')
-        }).catch(err => {
-            alert(err.message)
-        })
+            .then(result => {
+                setUser(result.user);
+                navigate(`${location.state ? location.state : '/'}`)
+            }).catch(err => {
+                setError(err.message)
+            })
+
+
+    }
+
+    const googleSignIn = () => {
+        goooleLogIn()
+            .then(result => {
+                setUser(result.user);
+                navigate(`${location.state ? location.state : '/'}`)
+                alert('successfully googleSign In')
+            }).catch(err => {
+                setError(err.message)
+            })
     }
     return (
         <div className='min-h-screen flex justify-center items-center'>
@@ -49,12 +77,17 @@ const Register = () => {
                             className="input"
                             placeholder="Password"
                             required />
+                        {passErr && <p className='text-sm font-bold text-red-500'>{passErr}</p>}
 
 
                         <div><a className="link link-hover">Forgot password?</a></div>
                         <button type='submit' className="btn btn-neutral bg-blue-500 mt-4">Register</button>
-                        <p className="font-semibold text-center mt-5">Already have an account?  Please <Link className='text-accent underline'>Log In</Link></p>
+                        <p className="font-semibold text-center mt-5">Already have an account?  Please <Link to='/login' className='text-accent underline'>Log In</Link></p>
                     </fieldset>
+                    <button onClick={() => googleSignIn()} className="btn bg-white text-black border-[#e5e5e5]">
+                        <FaGoogle></FaGoogle>
+                        Sign Up with Google
+                    </button>
                 </form>
             </div>
         </div>

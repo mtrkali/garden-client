@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
-import { Link, useLocation } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../AuthLayouts/AuthContext';
+import { FaGoogle } from 'react-icons/fa';
 const Login = () => {
 
-    const { logInUser, setUser, setError } = useContext(AuthContext)
+    const { logInUser, setUser, setError, goooleLogIn } = useContext(AuthContext)
     const location = useLocation();
-    console.log(location);
+    const navigate = useNavigate();
+
     const handleLogin = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -14,9 +16,21 @@ const Login = () => {
         console.log(email, password);
         // user login --
         logInUser(email, password)
+            .then(result => {
+                setUser(result.user)
+                navigate(`${location.state ? location.state : '/'}`)
+            }).catch(err => {
+                setError(err.message)
+            })
+    }
+
+    const googleSignIn = () => {
+        goooleLogIn()
         .then(result => {
-            setUser(result.user)
-        }).catch(err=>{
+            setUser(result.user);
+            navigate(`${location.state ? location.state : '/'}`)
+            alert('successfully googleSign In')
+        }).catch(err => {
             setError(err.message)
         })
     }
@@ -48,7 +62,12 @@ const Login = () => {
 
                         <div><a className="link link-hover">Forgot password?</a></div>
                         <button type='submit' className="btn btn-neutral bg-blue-500 mt-4">Login</button>
-                        <p className="font-semibold text-center mt-5">Don't have an account?  Please <Link className='text-red-500'>Register</Link></p>
+                        <p className="font-semibold text-center mt-5">Don't have an account?  Please <Link state={location.state} to='/register' className='text-red-500'>Register</Link></p>
+                        {/* Google */}
+                        <button onClick={()=>googleSignIn()} className="btn bg-white text-black border-[#e5e5e5]">
+                            <FaGoogle></FaGoogle>
+                            Login with Google
+                        </button>
                     </fieldset>
                 </form>
             </div>
