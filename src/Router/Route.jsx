@@ -9,13 +9,15 @@ import ShareTIp from "../Components/ShareTIp";
 import MyTip from "../Components/MyTip";
 import PrivateRoute from "../Provider/PrivateRoute";
 import TermsService from "../Pages/TermsService";
+import TipDetals from "../Pages/TipDetals";
+import UpdateTips from "../Pages/UpdateTips";
 
 const router = createBrowserRouter([
     {
         path: '/',
         Component: Root,
         children: [
-            {index: true,Component: Home},
+            { index: true, Component: Home },
             {
                 path: 'login',
                 Component: Login,
@@ -47,7 +49,17 @@ const router = createBrowserRouter([
             {
                 path: 'terms',
                 Component: TermsService,
-            }
+            },
+            {
+                path: 'tipDetals',
+                Component: TipDetals
+            },
+            {
+                path: 'updateTips',
+                element: <PrivateRoute>
+                    <UpdateTips></UpdateTips>
+                </PrivateRoute>
+            },
         ]
     }
 ]);
