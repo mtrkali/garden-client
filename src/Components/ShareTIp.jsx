@@ -9,7 +9,11 @@ const ShareTIp = () => {
         e.preventDefault();
         const form = e.target;
         const formData = new FormData(form);
-        const newTip = Object.fromEntries(formData.entries());
+        const formValue = Object.fromEntries(formData.entries());
+        const newTip = {
+            like:0,
+            ...formValue
+        }
         
         //post data to the DB --
         fetch('http://localhost:3000/tips',{

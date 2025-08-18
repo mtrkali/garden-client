@@ -1,9 +1,14 @@
-import React from 'react';
-import { Link } from 'react-router';
+import React, { useContext } from 'react';
+import { Link, useLoaderData } from 'react-router';
+import { AuthContext } from '../AuthLayouts/AuthContext';
 
 
 
 const MyTip = () => {
+    const { user } = useContext(AuthContext);
+    const tips = useLoaderData();
+
+    const myTips = tips.filter(tip => tip.email === user?.email)
 
     return (
         <div>
@@ -20,30 +25,32 @@ const MyTip = () => {
                     </thead>
                     <tbody>
                         {/* row 1 */}
-                        <tr>
-                            <td>
-                                <div className="">
-                                    <img
-                                        src="https://img.daisyui.com/images/profile/demo/2@94.webp"
-                                        className='rounded-lg'
-                                        alt="Avatar Tailwind CSS Component" />
-                                </div>
-                            </td>
-                            <td>
-                                Zemlak, Daniel and Leannon
-                                <br />
-                                <span className="">Desktop Support Technician</span>
-                            </td>
-                            <td>Purple</td>
-                            <th>
-                                <Link to='/updateTips'>
-                                    <button className="btn btn-outline btn-accent btn-xs px-5 mr-3">Update</button>
-                                </Link>
-                                <Link to=''>
-                                    <button className="btn btn-outline btn-secondary btn-xs px-5">Delete</button>
-                                </Link>
-                            </th>
-                        </tr>
+                        {
+                            myTips.map(myTip => <tr key={myTip._id}>
+                                <td>
+                                    <div className="">
+                                        <img
+                                            src={myTip.photo}
+                                            className='w-60 h-60 rounded-lg'
+                                            alt="Avatar Tailwind CSS Component" />
+                                    </div>
+                                </td>
+                                <td>
+                                    {myTip.name}
+                                    <br />
+                                    <span className="">Desktop Support Technician</span>
+                                </td>
+                                <td>Purple</td>
+                                <th>
+                                    <Link to='/updateTips'>
+                                        <button className="btn btn-outline btn-accent btn-xs px-5 mr-3">Update</button>
+                                    </Link>
+                                    <Link to=''>
+                                        <button className="btn btn-outline btn-secondary btn-xs px-5">Delete</button>
+                                    </Link>
+                                </th>
+                            </tr>)
+                        }
                     </tbody>
                 </table>
             </div>

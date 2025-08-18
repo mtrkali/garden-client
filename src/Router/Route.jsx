@@ -29,13 +29,13 @@ const router = createBrowserRouter([
             },
             {
                 path: 'explore',
-                loader: ()=> fetch('http://localhost:3000/gardenaers'),
-                Component: ExploreGarden
+                Component: ExploreGarden,
+                loader: () => fetch('http://localhost:3000/gardenaers'),
             },
             {
                 path: 'tips',
-                loader: ()=>fetch('http://localhost:3000/tips'),
-                Component: BrowsTips
+                Component: BrowsTips,
+                loader: () => fetch('http://localhost:3000/tips?availability=public'),
             },
             {
                 path: 'share-tip',
@@ -47,7 +47,8 @@ const router = createBrowserRouter([
                 path: 'my-tips',
                 element: <PrivateRoute>
                     <MyTip></MyTip>
-                </PrivateRoute>
+                </PrivateRoute>,
+                loader: () => fetch('http://localhost:3000/tips?availability=all'),
             },
             {
                 path: 'terms',
@@ -55,8 +56,8 @@ const router = createBrowserRouter([
             },
             {
                 path: 'tipDetails/:id',
-                loader: ({params}) => fetch(`http://localhost:3000/tips/${params.id}`),
                 Component: TipDetals,
+                loader: ({ params }) => fetch(`http://localhost:3000/tips/${params.id}`),
             },
             {
                 path: 'updateTips',
