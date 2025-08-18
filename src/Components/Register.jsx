@@ -16,18 +16,34 @@ const Register = () => {
         e.preventDefault();
         const form = e.target;
         const formData = new FormData(form)
-        const { name, email, password } = Object.fromEntries(formData.entries());
+        const { email, password, ...rest } = Object.fromEntries(formData.entries());
 
         if (!passwordRegex.test(password)) {
             setPassErr("Password must be at least 8 characters, include 1 uppercase, 1 lowercase, and 1 special character.")
-        } else {
-            setPassErr('');
+            return;
         }
         // creating user --
         registerUser(email, password)
             .then(result => {
                 setUser(result.user);
                 navigate(`${location.state ? location.state : '/'}`)
+                const newUser = {
+                    email, ...rest
+                }
+                // send this user to the DB --
+                fetch('http://localhost:3000/users', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(newUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.insertedId) {
+                            alert('successfully user inserted')
+                        }
+                    })
             }).catch(err => {
                 setError(err.message)
             })
@@ -60,6 +76,15 @@ const Register = () => {
                             placeholder="Name"
                             required />
 
+                        {/* phot URL */}
+                        <label className="label">Photo</label>
+                        <input
+                            type="text"
+                            name="photo"
+                            className="input"
+                            placeholder="photo URL"
+                            required />
+
                         {/* email */}
                         <label className="label">Email</label>
                         <input
@@ -84,11 +109,12 @@ const Register = () => {
                         <button type='submit' className="btn btn-neutral bg-blue-500 mt-4">Register</button>
                         <p className="font-semibold text-center mt-5">Already have an account?  Please <Link to='/login' className='text-accent underline'>Log In</Link></p>
                     </fieldset>
-                    <button onClick={() => googleSignIn()} className="btn bg-white text-black border-[#e5e5e5]">
-                        <FaGoogle></FaGoogle>
-                        Sign Up with Google
-                    </button>
+
                 </form>
+                <button onClick={() => googleSignIn()} className="btn bg-white text-black border-[#e5e5e5]">
+                    <FaGoogle></FaGoogle>
+                    Sign Up with Google
+                </button>
             </div>
         </div>
     );

@@ -11,6 +11,7 @@ import PrivateRoute from "../Provider/PrivateRoute";
 import TermsService from "../Pages/TermsService";
 import TipDetals from "../Pages/TipDetals";
 import UpdateTips from "../Pages/UpdateTips";
+import ErrorPage from "../Pages/ErrorPage";
 
 const router = createBrowserRouter([
     {
@@ -27,11 +28,13 @@ const router = createBrowserRouter([
                 Component: Register,
             },
             {
-                path: 'explore', //tips share-tip my-tips
+                path: 'explore',
+                loader: ()=> fetch('http://localhost:3000/gardenaers'),
                 Component: ExploreGarden
             },
             {
                 path: 'tips',
+                loader: ()=>fetch('http://localhost:3000/tips'),
                 Component: BrowsTips
             },
             {
@@ -51,8 +54,9 @@ const router = createBrowserRouter([
                 Component: TermsService,
             },
             {
-                path: 'tipDetals',
-                Component: TipDetals
+                path: 'tipDetails/:id',
+                loader: ({params}) => fetch(`http://localhost:3000/tips/${params.id}`),
+                Component: TipDetals,
             },
             {
                 path: 'updateTips',
@@ -60,6 +64,10 @@ const router = createBrowserRouter([
                     <UpdateTips></UpdateTips>
                 </PrivateRoute>
             },
+            {
+                path: '*',
+                Component: ErrorPage
+            }
         ]
     }
 ]);

@@ -4,12 +4,14 @@ import { NavLink } from "react-router";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../AuthLayouts/AuthContext";
 import { FaMoon, FaSun } from "react-icons/fa";
+import Loading from './Loading'
 
 const Navbar = () => {
-  const { logOut } = useContext(AuthContext)
+  const { logOut, user, profile } = useContext(AuthContext)
   const [showButton, setShowButton] = useState(false)
 
-
+  
+  
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
   useEffect(() => {
@@ -38,10 +40,10 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar bg-base-100 shadow-md px-4">
+    <div className="navbar bg-base-100 shadow-md lg:px-4">
       {/* Left: Logo */}
       <div className="navbar-start">
-        <h2 to="/" className="text-2xl font-bold text-green-600 flex items-center gap-3"><img src="https://i.ibb.co.com/gbDzgsdN/Green-Simple-Nature-Beauty-Care-Initials-Logo.png" className="w-12 rounded-full" alt="" /> GardenHub</h2>
+        <h2 to="/" className="text-xl lg:text-2xl font-bold text-green-600 flex items-center gap-3"><img src="https://i.ibb.co.com/gbDzgsdN/Green-Simple-Nature-Beauty-Care-Initials-Logo.png" className="w-12 rounded-full" alt="" /> GardenHub</h2>
       </div>
 
       {/* Center: Links for Large Devices */}
@@ -63,15 +65,19 @@ const Navbar = () => {
       {/* Right: Auth Buttons */}
       <div className="navbar-end hidden lg:flex gap-2">
 
-        <div onClick={() => setShowButton(showButton => !showButton)} className="relative h-12 w-20 cursor-pointer">
-          <img className="w-12 h-12 rounded-full mx-auto" src="https://i.ibb.co.com/mrDv1msJ/profile.jpg" alt="profile" />
-          <div className="absolute inset-0 opacity-0 hover:opacity-100 text-xs h-12">
-            <p className="text-white font-bold">Beautiful Garden</p>
+        {/* profile btn-- */}
+        {
+          user && <div onClick={() => setShowButton(showButton => !showButton)} className="relative h-12 w-20 cursor-pointer">
+            <img className="w-12 h-12 rounded-full mx-auto" src={profile?.photo ||user?.photoURL || 'https://i.ibb.co.com/b5ws6f07/defaul-profile.jpg'} alt="profile" />
+            <div className="absolute inset-0 opacity-0 hover:opacity-100 text-xs h-12">
+              <p className="text-white font-bold bg-black p-2">{profile?.name || user?.displayName
+}</p>
+            </div>
+            {
+              showButton && <button onClick={() => handleLogOut()} className="btn btn-primary text-xs">log Out</button>
+            }
           </div>
-          {
-            showButton && <button onClick={() => handleLogOut()} className="btn btn-primary text-xs">log Out</button>
-          }
-        </div>
+        }
 
         <NavLink to="/register" className="btn btn-outline btn-sm">Sign up</NavLink>
         <NavLink to="/login" className="btn btn-success btn-sm text-white">Login</NavLink>
@@ -88,6 +94,20 @@ const Navbar = () => {
             {theme === "light" ? <FaSun className="text-blue-500 cursor-pointer" title="Light Mode" /> : <FaMoon className="text-yellow-500 cursor-pointer" title="Night Mode" />}
           </button>
         </div>
+        {/* profile btn-- */}
+        {
+          user && <div onClick={() => setShowButton(showButton => !showButton)} className="relative h-12 w-20 cursor-pointer">
+            <img className="w-12 h-12 rounded-full mx-auto" src={profile?.photo ||user?.photoURL || 'https://i.ibb.co.com/b5ws6f07/defaul-profile.jpg'} alt="profile" />
+            <div className="absolute inset-0 opacity-0 hover:opacity-100 text-xs h-12">
+              <p className="text-white font-bold bg-black p-2">{profile?.name || user?.displayName
+}</p>
+            </div>
+            {
+              showButton && <button onClick={() => handleLogOut()} className="btn btn-primary text-xs">log Out</button>
+            }
+          </div>
+        }
+        {/* 3 line btn */}
         <div className="dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none"

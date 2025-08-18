@@ -1,10 +1,20 @@
-import React from 'react';
-import { Link } from 'react-router';
+import React, { useContext, useState } from 'react';
+import { Link, useLoaderData } from 'react-router';
+import { AuthContext } from '../AuthLayouts/AuthContext';
+import Loading from './Loading';
 
 const BrowsTips = () => {
+    const {loading} = useContext(AuthContext)
+    const intialTips = useLoaderData();
+    const [tips, setTips] = useState(intialTips);
+
+    if(loading) {
+        return <Loading></Loading>
+    }
+    console.log(tips);
     return (
-        <div>
-            <div className="overflow-x-auto">
+        <div className='grid  justify-items-center'>
+            <div className="overflow-x-auto  lg:w-11/12">
                 <table className="table">
                     {/* head */}
                     <thead>
@@ -17,27 +27,27 @@ const BrowsTips = () => {
                     </thead>
                     <tbody>
                         {/* row 1 */}
-                        <tr>
+                        {
+                            tips.map((tip) => <tr key={tip._id}>
                             <td>
                                 <div className="">
                                     <img
-                                        src="https://img.daisyui.com/images/profile/demo/2@94.webp"
-                                        className='rounded-lg'
+                                        src={tip.photo}
+                                        className='rounded-lg lg:w-52 lg:h-60'
                                         alt="Avatar Tailwind CSS Component" />
                                 </div>
                             </td>
                             <td>
-                                Zemlak, Daniel and Leannon
-                                <br />
-                                <span className="">Desktop Support Technician</span>
+                                <h1 className="text-lg lg:text-3xl">{tip.title}</h1>
                             </td>
-                            <td>Purple</td>
+                            <td className='text-xs lg:text-lg'>{tip.category}</td>
                             <th>
-                                <Link to='/tipDetals'>
+                                <Link to={`/tipDetails/${tip._id}`}>
                                     <button className="btn btn-outline btn-accent btn-xs">see more...</button>
                                 </Link>
                             </th>
-                        </tr>
+                        </tr>)
+                        }
                     </tbody>
                 </table>
             </div>

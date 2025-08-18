@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router';
 
+
+
 const MyTip = () => {
+
     return (
         <div>
             <div className="overflow-x-auto">
