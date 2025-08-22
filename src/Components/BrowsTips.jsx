@@ -4,17 +4,37 @@ import { AuthContext } from '../AuthLayouts/AuthContext';
 import Loading from './Loading';
 
 const BrowsTips = () => {
-    const {loading} = useContext(AuthContext)
+    const { loading } = useContext(AuthContext)
     const intialTips = useLoaderData();
-    const [tips, setTips] = useState(intialTips);
+    const [tips] = useState(intialTips);
+    const [filter, setFilter] = useState('All');
 
-    if(loading) {
+    //filter logic ---
+    console.log(filter);
+    const filteredTips = filter === 'All' ? tips : tips.filter(tip => tip.difficulty === filter)
+    if (loading) {
         return <Loading></Loading>
     }
-    console.log(tips);
+
     return (
-        <div className='grid  justify-items-center'>
+        <div className='grid  justify-items-center min-h-screen'>
             <div className="overflow-x-auto  lg:w-11/12">
+
+                <div className="flex justify-end mb-4">
+                    <select
+                        className="select select-bordered w-full max-w-xs"
+                        value={filter}
+                        onChange={(e) => setFilter(e.target.value)}
+                    >
+                        <option value="All">All</option>
+                        <option value="eassy">Easy</option>
+                        <option value="medium">Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                </div>
+
+
+
                 <table className="table">
                     {/* head */}
                     <thead>
@@ -27,8 +47,7 @@ const BrowsTips = () => {
                     </thead>
                     <tbody>
                         {/* row 1 */}
-                        {
-                            tips.map((tip) => <tr key={tip._id}>
+                        {filteredTips.length > 0 ? (filteredTips.map((tip) => <tr key={tip._id}>
                             <td>
                                 <div className="">
                                     <img
@@ -46,8 +65,11 @@ const BrowsTips = () => {
                                     <button className="btn btn-outline btn-accent btn-xs">see more...</button>
                                 </Link>
                             </th>
-                        </tr>)
-                        }
+                        </tr>)) : (<tr>
+                            <td colSpan="5" className="text-center text-red-500">
+                                No tips found.
+                            </td>
+                        </tr>)}
                     </tbody>
                 </table>
             </div>

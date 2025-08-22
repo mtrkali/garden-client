@@ -2,8 +2,9 @@ import React, { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../AuthLayouts/AuthContext';
 import { FaGoogle } from 'react-icons/fa';
+import Swal from 'sweetalert2';
 const Register = () => {
-    const { registerUser, setUser, goooleLogIn, setError, error } = useContext(AuthContext)
+    const { registerUser, setUser, goooleLogIn, setError} = useContext(AuthContext)
     const [passErr, setPassErr] = useState('');
 
     const location = useLocation();
@@ -41,7 +42,13 @@ const Register = () => {
                     .then(res => res.json())
                     .then(data => {
                         if (data.insertedId) {
-                            alert('successfully user inserted')
+                            Swal.fire({
+                                position: "center",
+                                icon: "success",
+                                title: "User Successfully added !!",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
                         }
                     })
             }).catch(err => {

@@ -5,13 +5,14 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../AuthLayouts/AuthContext";
 import { FaMoon, FaSun } from "react-icons/fa";
 import Loading from './Loading'
+import Swal from "sweetalert2";
 
 const Navbar = () => {
   const { logOut, user, profile } = useContext(AuthContext)
   const [showButton, setShowButton] = useState(false)
 
-  
-  
+
+
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
   useEffect(() => {
@@ -22,7 +23,13 @@ const Navbar = () => {
 
   const handleLogOut = () => {
     logOut().then(() => {
-      alert('successfully log out user')
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Log Out Successfull !!!",
+        showConfirmButton: false,
+        timer: 1500
+      });
     }).catch(err => {
       console.log(err.message);
     })
@@ -68,10 +75,10 @@ const Navbar = () => {
         {/* profile btn-- */}
         {
           user && <div onClick={() => setShowButton(showButton => !showButton)} className="relative h-12 w-20 cursor-pointer">
-            <img className="w-12 h-12 rounded-full mx-auto" src={profile?.photo ||user?.photoURL || 'https://i.ibb.co.com/b5ws6f07/defaul-profile.jpg'} alt="profile" />
+            <img className="w-12 h-12 rounded-full mx-auto" src={profile?.photo || user?.photoURL || 'https://i.ibb.co.com/b5ws6f07/defaul-profile.jpg'} alt="profile" />
             <div className="absolute inset-0 opacity-0 hover:opacity-100 text-xs h-12">
               <p className="text-white font-bold bg-black p-2">{profile?.name || user?.displayName
-}</p>
+              }</p>
             </div>
             {
               showButton && <button onClick={() => handleLogOut()} className="btn btn-primary text-xs">log Out</button>
@@ -97,10 +104,10 @@ const Navbar = () => {
         {/* profile btn-- */}
         {
           user && <div onClick={() => setShowButton(showButton => !showButton)} className="relative h-12 w-20 cursor-pointer">
-            <img className="w-12 h-12 rounded-full mx-auto" src={profile?.photo ||user?.photoURL || 'https://i.ibb.co.com/b5ws6f07/defaul-profile.jpg'} alt="profile" />
+            <img className="w-12 h-12 rounded-full mx-auto" src={profile?.photo || user?.photoURL || 'https://i.ibb.co.com/b5ws6f07/defaul-profile.jpg'} alt="profile" />
             <div className="absolute inset-0 opacity-0 hover:opacity-100 text-xs h-12">
               <p className="text-white font-bold bg-black p-2">{profile?.name || user?.displayName
-}</p>
+              }</p>
             </div>
             {
               showButton && <button onClick={() => handleLogOut()} className="btn btn-primary text-xs">log Out</button>

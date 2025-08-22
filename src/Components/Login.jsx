@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../AuthLayouts/AuthContext';
 import { FaGoogle } from 'react-icons/fa';
+import Swal from 'sweetalert2';
 const Login = () => {
 
     const { logInUser, setUser, setError, goooleLogIn } = useContext(AuthContext)
@@ -28,7 +29,13 @@ const Login = () => {
             .then(result => {
                 setUser(result.user);
                 navigate(`${location.state ? location.state : '/'}`)
-                alert('successfully googleSign In')
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Google signIn Successfull!!",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
             }).catch(err => {
                 setError(err.message)
             })
