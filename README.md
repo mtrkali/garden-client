@@ -21,3 +21,20 @@
 **Gardening Resource Hub** is a React-based web application aimed at gardening enthusiasts seeking inspiration, guidance, and community support. Leveraging modern technologies such as **React 19, TailwindCSS, DaisyUI, Firebase**, along with interactive libraries like **Swiper, SweetAlert2, React Simple Typewriter, and React Router v7**, this platform delivers a seamless and visually engaging user experience.
 
 The core intent of the project is to build a **community-driven online space** for discovering, sharing, and learning about gardening, plant care, composting, and eco-conscious practices. With secure authentication, polished UI elements, smooth navigation, and adaptable responsiveness, both novice and experienced gardeners will find the hub accessible and inspiring.
+
+
+## ⚙️ Installation & Setup Instructions
+To run this project locally, follow these steps:
+
+```bash
+# Clone the repository
+git clone https://github.com/mtrkali/garden-client.git
+
+# Navigate into the project directory
+cd garden-client
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
