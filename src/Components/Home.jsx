@@ -3,6 +3,7 @@ import BannerSlider from './BannerSlider';
 import FeaturedGardeners from './FeaturedGardeners';
 import TopTrendingTips from './TopTrendingTips';
 import PlantCare from '../Pages/PlantCare';
+import PopularPlants from '../Pages/GardenTestimonials';
 
 const Home = () => {
     return (
@@ -11,6 +12,7 @@ const Home = () => {
             <FeaturedGardeners></FeaturedGardeners>
             <TopTrendingTips></TopTrendingTips>
             <PlantCare></PlantCare>
+            <PopularPlants></PopularPlants>
         </div>
     );
 };

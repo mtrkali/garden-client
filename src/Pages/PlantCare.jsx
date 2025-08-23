@@ -8,7 +8,7 @@ const PlantCare = () => {
     ];
 
     return (
-        <div className="p-6 bg-green-200 rounded-2xl shadow-md my-5">
+        <div className="p-6 bg-green-200 rounded-2xl shadow-md my-20">
             <h2 className="text-2xl font-bold text-green-700 mb-4">Plant Care Tips</h2>
             <ul className="space-y-3">
                 {tips.map(tip => (
