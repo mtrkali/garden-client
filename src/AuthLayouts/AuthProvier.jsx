@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { AuthContext } from './AuthContext';
 import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
 import { auth } from '../firebase/firebase_init';
+import Swal from 'sweetalert2';
 const AuthProvier = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -44,14 +45,20 @@ const AuthProvier = ({ children }) => {
                     setDbUser(data);
                 })
                 .catch(err => {
-                    console.log(err.message);
+                    Swal.fire({
+                        position: 'center',
+                        icon: "success",
+                        title: `${err.message}`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
                 })
         })
         return () => {
             return unsubscribe();
         }
     }, [])
-      const profile = dbUser?.find(dbUserP => dbUserP.email === user?.email)
+    const profile = dbUser?.find(dbUserP => dbUserP.email === user?.email)
 
     const userInfo = {
         registerUser,

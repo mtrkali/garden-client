@@ -4,11 +4,15 @@ import FeaturedGardeners from './FeaturedGardeners';
 import TopTrendingTips from './TopTrendingTips';
 import PlantCare from '../Pages/PlantCare';
 import PopularPlants from '../Pages/GardenTestimonials';
+import Heading from '../Pages/Heading';
+import PlantCardWithTooltip from '../Pages/PlantCardWithTooltip ';
 
 const Home = () => {
     return (
         <div>
+            <Heading></Heading>
             <BannerSlider></BannerSlider>
+            <PlantCardWithTooltip></PlantCardWithTooltip>
             <FeaturedGardeners></FeaturedGardeners>
             <TopTrendingTips></TopTrendingTips>
             <PlantCare></PlantCare>

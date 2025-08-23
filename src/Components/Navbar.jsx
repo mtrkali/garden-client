@@ -31,7 +31,13 @@ const Navbar = () => {
         timer: 1500
       });
     }).catch(err => {
-      console.log(err.message);
+      Swal.fire({
+        position: 'center',
+        icon: "success",
+        title: `${err.message}`,
+        showConfirmButton: false,
+        timer: 1500
+      });
     })
   }
 
