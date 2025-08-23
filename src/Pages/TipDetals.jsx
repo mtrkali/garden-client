@@ -12,7 +12,7 @@ const TipDetals = () => {
         setLiked(!liked);
         const newLike = like + 1;
         setLike(newLike);
-        fetch('http://localhost:3000/tips', {
+        fetch(`http://localhost:3000/tips/${plant._id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
@@ -64,7 +64,14 @@ const TipDetals = () => {
                     </div>
 
                     {/* like button */}
-                    <button onClick={() => handleLike()} className={`btn btn-secondary ${liked ? '' : 'btn-outline'}`}>{liked ? 'liked' : 'like'}</button>
+                    <button
+                        onClick={handleLike}
+                        className={`btn btn-secondary flex items-center gap-2 ${liked ? '' : 'btn-outline'}`}
+                    >
+                        <AiFillLike />
+                        {liked ? "Liked" : "Like"} ({like})
+                    </button>
+
                 </div>
             </div>
         </div>

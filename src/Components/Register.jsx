@@ -4,7 +4,7 @@ import { AuthContext } from '../AuthLayouts/AuthContext';
 import { FaGoogle } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 const Register = () => {
-    const { registerUser, setUser, goooleLogIn, setError} = useContext(AuthContext)
+    const { registerUser, setUser, goooleLogIn, setError } = useContext(AuthContext)
     const [passErr, setPassErr] = useState('');
 
     const location = useLocation();
@@ -63,7 +63,13 @@ const Register = () => {
             .then(result => {
                 setUser(result.user);
                 navigate(`${location.state ? location.state : '/'}`)
-                alert('successfully googleSign In')
+                Swal.fire({
+                    position: 'center',
+                    icon: "success",
+                    title: "successfully googleSign In !!",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
             }).catch(err => {
                 setError(err.message)
             })

@@ -10,7 +10,6 @@ const BrowsTips = () => {
     const [filter, setFilter] = useState('All');
 
     //filter logic ---
-    console.log(filter);
     const filteredTips = filter === 'All' ? tips : tips.filter(tip => tip.difficulty === filter)
     if (loading) {
         return <Loading></Loading>
