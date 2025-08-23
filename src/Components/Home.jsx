@@ -1,9 +1,14 @@
 import React from 'react';
+import BannerSlider from './BannerSlider';
+import FeaturedGardeners from './FeaturedGardeners';
+import TopTrendingTips from './TopTrendingTips';
 
 const Home = () => {
     return (
         <div>
-            hello this is home
+            <BannerSlider></BannerSlider>
+            <FeaturedGardeners></FeaturedGardeners>
+            <TopTrendingTips></TopTrendingTips>
         </div>
     );
 };

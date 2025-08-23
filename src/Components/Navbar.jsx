@@ -47,7 +47,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar bg-base-100 shadow-md lg:px-4">
+    <div className="navbar bg-base-100 shadow-md lg:px-4 sticky top-0 z-50">
       {/* Left: Logo */}
       <div className="navbar-start">
         <h2 to="/" className="text-xl lg:text-2xl font-bold text-green-600 flex items-center gap-3"><img src="https://i.ibb.co.com/gbDzgsdN/Green-Simple-Nature-Beauty-Care-Initials-Logo.png" className="w-12 rounded-full" alt="" /> GardenHub</h2>

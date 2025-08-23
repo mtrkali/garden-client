@@ -30,7 +30,7 @@ const router = createBrowserRouter([
             {
                 path: 'explore',
                 Component: ExploreGarden,
-                loader: () => fetch('http://localhost:3000/gardenaers'),
+                loader: () => fetch('http://localhost:3000/gardenaers?status=all'),
             },
             {
                 path: 'tips',
