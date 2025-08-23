@@ -5,7 +5,7 @@ import TopTrendingTips from './TopTrendingTips';
 import PlantCare from '../Pages/PlantCare';
 import PopularPlants from '../Pages/GardenTestimonials';
 import Heading from '../Pages/Heading';
-import PlantCardWithTooltip from '../Pages/PlantCardWithTooltip ';
+import PlantCardWithTooltip from './PlantCardWithTooltip ';
 
 const Home = () => {
     return (

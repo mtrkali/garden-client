@@ -30,12 +30,12 @@ const router = createBrowserRouter([
             {
                 path: 'explore',
                 Component: ExploreGarden,
-                loader: () => fetch('http://localhost:3000/gardenaers?status=all'),
+                loader: () => fetch('https://garden-server-zeta.vercel.app/gardenaers?status=all'),
             },
             {
                 path: 'tips',
                 Component: BrowsTips,
-                loader: () => fetch('http://localhost:3000/tips?availability=public'),
+                loader: () => fetch('https://garden-server-zeta.vercel.app/tips?availability=public'),
             },
             {
                 path: 'share-tip',
@@ -48,7 +48,7 @@ const router = createBrowserRouter([
                 element: <PrivateRoute>
                     <MyTip></MyTip>
                 </PrivateRoute>,
-                loader: () => fetch('http://localhost:3000/tips?availability=all'),
+                loader: () => fetch('https://garden-server-zeta.vercel.app/tips?availability=all'),
             },
             {
                 path: 'terms',
@@ -57,7 +57,7 @@ const router = createBrowserRouter([
             {
                 path: 'tipDetails/:id',
                 Component: TipDetals,
-                loader: ({ params }) => fetch(`http://localhost:3000/tips/${params.id}`),
+                loader: ({ params }) => fetch(`https://garden-server-zeta.vercel.app/tips/${params.id}`),
             },
             {
                 path: 'updateTips',

@@ -32,7 +32,7 @@ const Register = () => {
                     email, ...rest
                 }
                 // send this user to the DB --
-                fetch('http://localhost:3000/users', {
+                fetch('https://garden-server-zeta.vercel.app/users', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

@@ -39,7 +39,7 @@ const AuthProvier = ({ children }) => {
             setLoading(false)
 
             //user extra info fatching[name, photo, email]
-            fetch('http://localhost:3000/users')
+            fetch('https://garden-server-zeta.vercel.app/users')
                 .then(res => res.json())
                 .then(data => {
                     setDbUser(data);

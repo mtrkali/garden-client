@@ -4,7 +4,7 @@ const FeaturedGardeners = () => {
   const [gardeners, setGardeners] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/gardenaers?status=active")
+    fetch("https://garden-server-zeta.vercel.app/gardenaers?status=active")
       .then((res) => res.json())
       .then((data) => setGardeners(data));
   }, []);

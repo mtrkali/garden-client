@@ -12,7 +12,7 @@ const TipDetals = () => {
         setLiked(!liked);
         const newLike = like + 1;
         setLike(newLike);
-        fetch(`http://localhost:3000/tips/${plant._id}`, {
+        fetch(`https://garden-server-zeta.vercel.app/tips/${plant._id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'

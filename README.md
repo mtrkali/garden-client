@@ -1,12 +1,23 @@
-# React + Vite
+# ​ Gardening Resource Hub
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## ​ Live Site URL
+[Visit Live Site](https://garden-client-f1349.web.app/)
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ​ Features
+- **Firebase Authentication** – Secure user registration and login.
+- **TailwindCSS + DaisyUI** – Clean, responsive, and modern design.
+- **Resource Sharing** – Explore and share gardening tips, composting guides, plant care resources.
+- **Interactive Carousel (Swiper.js)** – Showcase gardening images and tutorials in a beautiful slider.
+- **SweetAlert2 Popups** – Stylish alerts for user actions like login success or errors.
+- **Smooth Routing (React Router v7)** – Fast, client-side navigation between pages.
+- **Animated Effects (React Simple Typewriter + React Tooltip)** – Engaging text animations and tooltips for better user experience.
+- **Responsive Design** – Fully optimized for mobile, tablet, and desktop viewing.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ​ Project Description
+**Gardening Resource Hub** is a React-based web application aimed at gardening enthusiasts seeking inspiration, guidance, and community support. Leveraging modern technologies such as **React 19, TailwindCSS, DaisyUI, Firebase**, along with interactive libraries like **Swiper, SweetAlert2, React Simple Typewriter, and React Router v7**, this platform delivers a seamless and visually engaging user experience.
+
+The core intent of the project is to build a **community-driven online space** for discovering, sharing, and learning about gardening, plant care, composting, and eco-conscious practices. With secure authentication, polished UI elements, smooth navigation, and adaptable responsiveness, both novice and experienced gardeners will find the hub accessible and inspiring.
