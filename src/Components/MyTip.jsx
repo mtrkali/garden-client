@@ -36,46 +36,53 @@ const MyTip = () => {
     }
     return (
         <div>
-            <div className="overflow-x-auto">
-                <table className="table">
-                    {/* head */}
-                    <thead>
-                        <tr>
-                            <th>image</th>
-                            <th>title</th>
-                            <th>Category</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {/* row 1 */}
-                        {
-                            myTips.map(myTip => <tr key={myTip._id}>
-                                <td>
-                                    <div className="">
-                                        <img
-                                            src={myTip.photo}
-                                            className='w-30 h-30 lg:w-60 lg:h-60 rounded-lg'
-                                            alt="Avatar Tailwind CSS Component" />
-                                    </div>
-                                </td>
-                                <td className='text-lg lg:text-2xl'>
-                                    {myTip.title}
-                                </td>
-                                <td className='text-xs lg:text-lg'>{myTip.category}</td>
-                                <th>
-                                    <Link to='/updateTips' state={{ myTip }}>
-                                        <button className="btn btn-outline btn-accent btn-xs px-5 mr-3">Update</button>
-                                    </Link>
-                                    <Link onClick={() => handleDelete(myTip._id)}>
-                                        <button className="btn btn-outline btn-secondary btn-xs px-5">Delete</button>
-                                    </Link>
-                                </th>
-                            </tr>)
-                        }
-                    </tbody>
-                </table>
-            </div>
+            {intialTips.length === 0 ?
+                <div className="h-[500px] flex justify-center items-center">
+                    <h1 className="text-3xl lg:text-7xl text-accent italic">You have no Tips Yet !!</h1>
+                </div>
+                :
+                <div className="overflow-x-auto">
+                    <table className="table">
+                        {/* head */}
+                        <thead>
+                            <tr>
+                                <th>image</th>
+                                <th>title</th>
+                                <th>Category</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {/* row 1 */}
+                            {
+                                myTips.map(myTip => <tr key={myTip._id}>
+                                    <td>
+                                        <div className="">
+                                            <img
+                                                src={myTip.photo}
+                                                className='w-30 h-30 lg:w-60 lg:h-60 rounded-lg'
+                                                alt="Avatar Tailwind CSS Component" />
+                                        </div>
+                                    </td>
+                                    <td className='text-lg lg:text-2xl'>
+                                        {myTip.title}
+                                    </td>
+                                    <td className='text-xs lg:text-lg'>{myTip.category}</td>
+                                    <th>
+                                        <Link to='/updateTips' state={{ myTip }}>
+                                            <button className="btn btn-outline btn-accent btn-xs px-5 mr-3">Update</button>
+                                        </Link>
+                                        <Link onClick={() => handleDelete(myTip._id)}>
+                                            <button className="btn btn-outline btn-secondary btn-xs px-5">Delete</button>
+                                        </Link>
+                                    </th>
+                                </tr>)
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+
         </div>
     );
 };

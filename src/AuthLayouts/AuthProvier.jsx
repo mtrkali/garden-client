@@ -8,6 +8,7 @@ const AuthProvier = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('')
     const [dbUser, setDbUser] = useState([]);
+    const [profile, setProfile] = useState(null);
 
     // Register User --
     const registerUser = (email, password) => {
@@ -38,27 +39,30 @@ const AuthProvier = ({ children }) => {
             setUser(currentUser);
             setLoading(false)
 
-            //user extra info fatching[name, photo, email]
-            fetch('https://garden-server-zeta.vercel.app/users')
-                .then(res => res.json())
-                .then(data => {
-                    setDbUser(data);
-                })
-                .catch(err => {
-                    Swal.fire({
-                        position: 'center',
-                        icon: "success",
-                        title: `${err.message}`,
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                })
-        })
-        return () => {
-            return unsubscribe();
-        }
+            if (currentUser) {
+                //user extra info fatching[name, photo, email]
+                fetch('https://garden-server-zeta.vercel.app/users')
+                    .then(res => res.json())
+                    .then(data => {
+                        setDbUser(data);
+                        const userProfile = data.find(u => u.email === currentUser.email);
+                        setProfile(userProfile);
+                    })
+                    .catch(err => {
+                        Swal.fire({
+                            position: 'center',
+                            icon: "success",
+                            title: `${err.message}`,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    })
+            } else {
+                setProfile(null);
+            }
+        });
+        return () => unsubscribe();
     }, [])
-    const profile = dbUser?.find(dbUserP => dbUserP.email === user?.email)
 
     const userInfo = {
         registerUser,

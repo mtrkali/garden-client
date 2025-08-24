@@ -4,7 +4,8 @@ import { AuthContext } from '../AuthLayouts/AuthContext';
 import { FaGoogle } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 const Register = () => {
-    const { registerUser, setUser, goooleLogIn, setError } = useContext(AuthContext)
+    const { registerUser, setUser, goooleLogIn, setError, user } = useContext(AuthContext)
+    console.log(user);
     const [passErr, setPassErr] = useState('');
 
     const location = useLocation();
@@ -18,6 +19,8 @@ const Register = () => {
         const form = e.target;
         const formData = new FormData(form)
         const { email, password, ...rest } = Object.fromEntries(formData.entries());
+        const { photo, name } = Object.fromEntries(formData.entries());
+
 
         if (!passwordRegex.test(password)) {
             setPassErr("Password must be at least 8 characters, include 1 uppercase, 1 lowercase, and 1 special character.")
@@ -50,6 +53,7 @@ const Register = () => {
                                 timer: 1500
                             });
                         }
+                        setUser({...user,photoURL:photo, displayName:name})
                     })
             }).catch(err => {
                 setError(err.message)
