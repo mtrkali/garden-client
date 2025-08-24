@@ -13,7 +13,7 @@ const UpdateTips = () => {
         const updatedTip = Object.fromEntries(formData.entries());
 
         //update data to the database --
-        fetch(`http://localhost:3000/tips/${myTip._id}`, {
+        fetch(`https://garden-server-zeta.vercel.app/tips/${myTip._id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

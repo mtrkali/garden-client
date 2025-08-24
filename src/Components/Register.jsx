@@ -5,7 +5,6 @@ import { FaGoogle } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 const Register = () => {
     const { registerUser, setUser, goooleLogIn, setError, user } = useContext(AuthContext)
-    console.log(user);
     const [passErr, setPassErr] = useState('');
 
     const location = useLocation();

@@ -17,7 +17,7 @@ const ShareTIp = () => {
         }
 
         //post data to the DB --
-        fetch('http://localhost:3000/tips', {
+        fetch('https://garden-server-zeta.vercel.app/tips', {
             method: "POST",
             headers: {
                 'content-type': 'application/json'
@@ -34,6 +34,7 @@ const ShareTIp = () => {
                         showConfirmButton: false,
                         timer: 1500
                     });
+                    form.reset();
                 }
             })
     }
@@ -93,12 +94,12 @@ const ShareTIp = () => {
 
                     <fieldset className="fieldset bg-base-200 rounded-box  border p-4">
                         <legend className="fieldset-legend  font-bold text-lg">Name </legend>
-                        <input type="text" name='name' className="input w-full " value={profile?.name || user?.displayName} readOnly />
+                        <input type="text" name='name' className="input w-full " value={user?.displayName || profile?.name} readOnly />
                     </fieldset>
 
                     <fieldset className="fieldset bg-base-200 rounded-box  border p-4">
                         <legend className="fieldset-legend  font-bold text-lg">Email </legend>
-                        <input type="text" name='email' className="input w-full " value={user?.email || ''} readOnly />
+                        <input type="text" name='email' className="input w-full " value={user?.email ||profile?.email || ''} readOnly />
                     </fieldset>
                 </div>
                 <fieldset className="fieldset bg-base-200 rounded-box border p-4 mt-5">

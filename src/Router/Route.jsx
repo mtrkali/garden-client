@@ -47,8 +47,7 @@ const router = createBrowserRouter([
                 path: 'my-tips',
                 element: <PrivateRoute>
                     <MyTip></MyTip>
-                </PrivateRoute>,
-                loader: () => fetch('https://garden-server-zeta.vercel.app/tips?availability=all'),
+                </PrivateRoute>
             },
             {
                 path: 'terms',

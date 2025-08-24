@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
 const Navbar = () => {
   const { logOut, user, profile } = useContext(AuthContext)
   const [showButton, setShowButton] = useState(false)
-console.log(profile);
+
 
 
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
